@@ -46,13 +46,16 @@ CTexture Textcasa;//Paredes blancas
 CTexture Textcasa2;//Ladrillo negro
 CTexture Textcasa3;//Castillos parte de abajo
 CTexture cedro;//madera cedro
+CTexture telaroja;
+CTexture madera_cabecera;
+CTexture tela_almohada;
 
 //Se utilizarán para definir cada figura que el programador cree//
 CFiguras f_enrique;
 //CFiguras f_jorge;
 CFiguras f_hugo;
 //CFiguras f_diego;
-//CFiguras fig2;
+CFiguras fig2;
 
 
 ////Figuras de 3D Studio
@@ -120,6 +123,17 @@ void InitGL ( GLvoid )     // Inicializamos parametros
 	cedro.BuildGLTexture();
 	cedro.ReleaseImage();
 
+	telaroja.LoadTGA("Casa/telaroja.tga");
+	telaroja.BuildGLTexture();
+	telaroja.ReleaseImage();
+
+	madera_cabecera.LoadTGA("Casa/madera_cabecera.tga");
+	madera_cabecera.BuildGLTexture();
+	madera_cabecera.ReleaseImage();
+
+	tela_almohada.LoadTGA("Casa/tela_almohada.tga");
+	tela_almohada.BuildGLTexture();
+	tela_almohada.ReleaseImage();
 	////Carga de Figuras
 	//kit._3dsLoad("kitt.3ds");	
 	////kit.VertexNormals();
@@ -141,6 +155,60 @@ void pintaTexto(float x, float y, float z, void *font,char *string)
     glutBitmapCharacter(font, *c); //imprime
   }
 }
+
+void silla(void) {
+
+	
+
+
+}
+void cama(void) { 
+	
+	
+	glPushMatrix();
+	
+
+	glPushMatrix();
+	glScalef(2, .5, 3);
+	f_hugo.prisma2(telaroja.GLindex, telaroja.GLindex);
+	glPopMatrix();
+	//cabecera
+	glPushMatrix();
+	glTranslatef(0, 0.3, 1.5);
+	glScalef(2, 1 , .1);
+	f_hugo.prisma2(madera_cabecera.GLindex, madera_cabecera.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-.7, -0.2,1.2);
+	glScalef(.2, .3, .2);
+	f_hugo.prisma2(cedro.GLindex, cedro.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-.7, -.2, -1.2);
+	glScalef(.2, .3, .2);
+	f_hugo.prisma2(cedro.GLindex, cedro.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(.7, -.2, 1.2);
+	glScalef(.2, .3, .2);
+	f_hugo.prisma2(cedro.GLindex, cedro.GLindex);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(.7, -.2, -1.2);
+	glScalef(.2, .3, .2);
+	f_hugo.prisma2(cedro.GLindex, cedro.GLindex);
+	glPopMatrix();
+
+	
+
+	glPopMatrix();
+
+}
+
 void mesa(void) {
 	glPushMatrix();
 	glScalef(2, 0.1, 2);
@@ -398,7 +466,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glPushMatrix();
 	glTranslatef(0, 10, 0);
 	
-					mesa();
+	silla();
 					glPopMatrix();
 				glPopMatrix();
 			glPopMatrix();//Pop para todo el escenario
